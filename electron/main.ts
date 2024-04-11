@@ -77,14 +77,13 @@ function createWindow() {
 
   //win.setIcon(trayIcon);
 
-
   tray.on("click", () => {
-    if (win?.isMinimized() == true) {
-      win?.restore();
-      win?.focus();
-      hasNewMessage = false;
-      clearInterval(interval);
-    }
+    //if (win?.isMinimized() == true) {
+    win?.restore();
+    win?.focus();
+    hasNewMessage = false;
+    clearInterval(interval);
+    //}
   });
 
   if (VITE_DEV_SERVER_URL) {
@@ -131,10 +130,10 @@ function showNotification(win: BrowserWindow | null, title: string, body: string
     notification.show();
 
     notification.on('click', () => {
-      if (win?.isMinimized() == true) {
+      //if (win?.isMinimized() == true) {
         win?.restore();
         win?.focus();
-      }
+      //}
     });
   } else {
     console.log('Уведомления не поддерживаются на этой платформе');
@@ -148,7 +147,7 @@ function getMenu(win: BrowserWindow): Menu {
         label: 'Перейти по адесу в буфере', click() {
           win.loadURL(clipboard.readText());
         }
-      },{
+      }, {
         label: 'Убрать панель слева', click() {
           win.webContents.executeJavaScript('document.querySelector(".bx-im-messenger__list_container").remove()');
         }
